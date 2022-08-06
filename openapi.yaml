@@ -1,0 +1,1614 @@
+openapi: 3.0.0
+x-stoplight:
+  id: rex8a3wggvevk
+info:
+  title: API
+  version: '1.3'
+servers:
+  - url: 'https://polyana1c.ru:25101/DEVCRM/hs/pd/'
+paths:
+  /city:
+    get:
+      summary: Get cities
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Address'
+              examples:
+                example-1:
+                  value:
+                    - name: Cамара
+                      lat: 53.2
+                      lon: 50.14
+                      cityFiasId: bb035cc3-1dc2-4627-9d25-a1bf2d4b936b
+                    - name: Уфа
+                      lat: 54.44
+                      lon: 55.58
+                      cityFiasId: 7339e834-2cb4-4734-a4c7-1fca2c66e562
+      operationId: get-city
+      description: Доступные города для доставки
+  /address/suggest:
+    post:
+      summary: Get address suggestions
+      operationId: address-suggest
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Address'
+              examples:
+                example-1:
+                  value:
+                    - name: Ерошевского д. 20
+                      lat: 53.11
+                      lon: 50.1
+                      cityFiasId: bb035cc3-1dc2-4627-9d25-a1bf2d4b936b
+                    - name: Ново-садовая д. 21
+                      lat: 53.11
+                      lon: 50.1
+                      cityFiasId: bb035cc3-1dc2-4627-9d25-a1bf2d4b936b
+                    - name: Московский проспект д. 22
+                      lat: 53.11
+                      lon: 50.1
+                      cityFiasId: bb035cc3-1dc2-4627-9d25-a1bf2d4b936b
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                address:
+                  type: string
+                  example: Ерошевского 20
+                lat:
+                  type: number
+                  example: 53.11
+                lon:
+                  type: number
+                  example: 50.1
+                cityFiasId:
+                  type: string
+                  example: bb035cc3-1dc2-4627-9d25-a1bf2d4b936b
+              required:
+                - cityFiasId
+            examples: {}
+        description: Отправляем с запросом адрес текстом или широту и долготу
+      description: Список подсказок адресов
+    parameters: []
+  /promotions:
+    post:
+      summary: Get promotions
+      operationId: post-promotions
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Promotion'
+              examples:
+                example-1:
+                  value:
+                    - id: '1'
+                      name: Новая акция
+                      description: Дарим подарки на этой недели !
+                      image: 'https://files.report.su/imagefolder/1958d5b4-05f9-4273-96ad-3e133c7d2cfa.jpg'
+                      link: string
+                    - id: '1'
+                      name: Новая акция
+                      description: Дарим подарки на этой недели !
+                      image: 'https://files.report.su/imagefolder/1958d5b4-05f9-4273-96ad-3e133c7d2cfa.jpg'
+                      link: string
+                    - id: '1'
+                      name: Новая акция
+                      description: Дарим подарки на этой недели !
+                      image: 'https://files.report.su/imagefolder/1958d5b4-05f9-4273-96ad-3e133c7d2cfa.jpg'
+                      link: string
+                    - id: '1'
+                      name: Новая акция
+                      description: Дарим подарки на этой недели !
+                      image: 'https://files.report.su/imagefolder/1958d5b4-05f9-4273-96ad-3e133c7d2cfa.jpg'
+                      link: string
+                    - id: '1'
+                      name: Новая акция
+                      description: Дарим подарки на этой недели !
+                      image: 'https://files.report.su/imagefolder/1958d5b4-05f9-4273-96ad-3e133c7d2cfa.jpg'
+                      link: string
+                    - id: '1'
+                      name: Новая акция
+                      description: Дарим подарки на этой недели !
+                      image: 'https://files.report.su/imagefolder/1958d5b4-05f9-4273-96ad-3e133c7d2cfa.jpg'
+                      link: string
+                    - id: '1'
+                      name: Новая акция
+                      description: Дарим подарки на этой недели !
+                      image: 'https://files.report.su/imagefolder/1958d5b4-05f9-4273-96ad-3e133c7d2cfa.jpg'
+                      link: string
+                    - id: '1'
+                      name: Новая акция
+                      description: Дарим подарки на этой недели !
+                      image: 'https://files.report.su/imagefolder/1958d5b4-05f9-4273-96ad-3e133c7d2cfa.jpg'
+                      link: string
+      description: Пуолучить все акции для города
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                cityFiasId:
+                  type: string
+                  example: bb035cc3-1dc2-4627-9d25-a1bf2d4b936b
+              required:
+                - cityFiasId
+  /auth/send-code:
+    post:
+      summary: Send auth code
+      operationId: auth-send-code
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  expirationTime:
+                    type: number
+                    description: в миллисикундах
+                    example: '1000000'
+                required:
+                  - expirationTime
+              examples:
+                example-1:
+                  value:
+                    expirationTime: '1000000'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PhoneNumber'
+            examples: {}
+      x-internal: false
+      tags:
+        - auth
+      description: Отправка кода подтверждения на номер телефона
+  /auth/code-verify:
+    post:
+      summary: Verify code
+      operationId: auth-code-verify
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthToken'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                phoneNumber:
+                  type: string
+                  example: '+70212314567'
+                code:
+                  type: string
+                  example: '4531'
+              required:
+                - phoneNumber
+                - code
+            examples: {}
+      tags:
+        - auth
+      description: Проверка кода отправленного на телефон
+      x-extension-1: null
+  /auth/refresh-token:
+    post:
+      summary: Refresh token
+      operationId: auth-refresh-token
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthToken'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                refreshToken:
+                  type: string
+                  example: к23к-12313ак213-1234
+              required:
+                - refreshToken
+      description: Обновление токена после невалидности основного
+      tags:
+        - auth
+  /user:
+    get:
+      summary: Get or Patch user data
+      tags:
+        - user
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+              examples: {}
+        '401':
+          description: Unauthorized
+      operationId: get-current-user
+      description: Данные пользователя
+      parameters: []
+    patch:
+      summary: ''
+      operationId: update-user
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          headers: {}
+        '401':
+          description: Unauthorized
+      tags:
+        - user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                firstName:
+                  type: string
+                secondName:
+                  type: string
+                birthday:
+                  type: string
+                  format: date
+                email:
+                  type: string
+                  format: email
+      description: Изменить данные пользователя
+  /user/orders:
+    post:
+      summary: User's orders
+      operationId: post-user-orders
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      example: 12312в-1в12уа12-а123а-123
+                    name:
+                      type: string
+                      example: №128 / Дом Нино
+                    date:
+                      type: string
+                      example: '17 августа 2021 в 15:03'
+                    address:
+                      type: string
+                      example: 'Советской армии, 16'
+                    sum:
+                      type: number
+                      example: 4070
+                    isActive:
+                      type: boolean
+                    status:
+                      type: string
+                    products:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          count:
+                            type: number
+                            example: '2'
+                          oldPrice:
+                            type: number
+                            example: 2070
+                          productDetail:
+                            $ref: '#/components/schemas/ProductDetail'
+                        required:
+                          - count
+                          - oldPrice
+                          - productDetail
+                  required:
+                    - id
+                    - name
+                    - date
+                    - address
+                    - sum
+                    - isActive
+                    - status
+                    - products
+              examples:
+                example-1:
+                  value:
+                    - id: 12312в-1в12уа12-а123а-123
+                      name: №128 / Дом Нино
+                      date: '17 августа 2021 в 15:03'
+                      address: 'Советской армии, 16'
+                      sum: 4070
+                      isActive: true
+                      status: string
+                      products:
+                        - count: '2'
+                          oldPrice: 2070
+                          productDetail:
+                            id: 1233fd-f23fwe12-d23e1f12r12f
+                            conceptionId: '1'
+                            tags:
+                              - '1'
+                            name: Перчини
+                            price: 1200
+                            image: 'https://files.report.su/imagefolder/5e6e73a5-1afe-4130-85d3-f528335d9730.jpg'
+                            description: 'Пицца приготовленная с душой '
+                            isAvailable: true
+                            weight: 100 г
+                            nutritionFact:
+                              energyValue: 500 ккал
+                              protein: 10 г
+                              fat: 50 г
+                              carbohydrate: 20 г
+                            modifiers:
+                              - id: '1'
+                                name: Соус
+                                required: true
+                                minAmount: 1
+                                maxAmount: 2
+                                childModifiers:
+                                  - id: '2'
+                                    name: Острый
+                                    required: true
+                                    minAmount: 1
+                                    maxAmount: 1
+                                    price: 100
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                lastOrderId:
+                  type: string
+                  example: а123123-12к1а123
+      tags:
+        - user
+      description: Заказы пользователя
+      parameters: []
+  /user/about:
+    post:
+      summary: User's about
+      operationId: post-user-about
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  description:
+                    type: string
+                    example: 'Доставка в Самаре, доставляем по всему городу'
+                  img:
+                    type: string
+                    format: uri
+                    example: 'https://files.report.su/imagefolder/1958d5b4-05f9-4273-96ad-3e133c7d2cfa.jpg'
+                required:
+                  - description
+                  - img
+        '401':
+          description: Unauthorized
+      tags:
+        - user
+      description: О нас
+      parameters: []
+  /user/recall:
+    post:
+      summary: User recall
+      operationId: post-user-recall
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                text:
+                  type: string
+                  example: Моя проблема такова
+              required:
+                - text
+      tags:
+        - user
+      description: Оставить отзыв
+      parameters: []
+  /conception/all:
+    post:
+      summary: Get all conceptions
+      operationId: conception-all
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  markets:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Conception'
+                  restaurants:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Conception'
+                required:
+                  - markets
+                  - restaurants
+              examples:
+                example-1:
+                  value:
+                    markets:
+                      - id: '1'
+                        name: Перчини
+                        description: Перчини на огне
+                        additionText: доставим бесплатно от 900 рублей
+                        imageBanner: 'https://files.report.su/imagefolder/1958d5b4-05f9-4273-96ad-3e133c7d2cfa.jpg'
+                        deliveryTime: 40-50 мин
+                        workTime: '10:00—23:00'
+                        costliness: 1
+                        isAvailable: true
+                        notAvailableDescription: Ресторан не работает до завтра
+                      - id: '2'
+                        name: Перчини
+                        description: Перчини на огне
+                        additionText: доставим бесплатно от 900 рублей
+                        imageBanner: 'https://files.report.su/imagefolder/863b3cd1-ad78-4587-b311-2905685a238c.jpg'
+                        deliveryTime: 40-50 мин
+                        workTime: '10:00—23:00'
+                        costliness: 2
+                        isAvailable: false
+                        notAvailableDescription: Ресторан не работает до завтра
+                      - id: '3'
+                        name: Перчини
+                        description: Перчини на огне
+                        additionText: доставим бесплатно от 900 рублей
+                        imageBanner: 'https://files.report.su/imagefolder/04189eb3-c1ed-4bad-a547-f0180da3db5a.jpg'
+                        deliveryTime: 40-50 мин
+                        workTime: '10:00—23:00'
+                        costliness: 3
+                        isAvailable: true
+                        notAvailableDescription: Ресторан не работает до завтра
+                      - id: '4'
+                        name: Перчини
+                        description: Перчини на огне
+                        additionText: доставим бесплатно от 900 рублей
+                        imageBanner: 'https://files.report.su/imagefolder/bd25c3e3-87a7-4f91-93d4-d97108c24dc2.jpg'
+                        deliveryTime: 40-50 мин
+                        workTime: '10:00—23:00'
+                        costliness: 1
+                        isAvailable: true
+                        notAvailableDescription: Ресторан не работает до завтра
+                      - id: '5'
+                        name: Перчини
+                        description: Перчини на огне
+                        additionText: доставим бесплатно от 900 рублей
+                        imageBanner: 'https://files.report.su/imagefolder/1958d5b4-05f9-4273-96ad-3e133c7d2cfa.jpg'
+                        deliveryTime: 40-50 мин
+                        workTime: '10:00—23:00'
+                        costliness: 1
+                        isAvailable: true
+                        notAvailableDescription: Ресторан не работает до завтра
+                      - id: '6'
+                        name: Перчини
+                        description: Перчини на огне
+                        additionText: доставим бесплатно от 900 рублей
+                        imageBanner: 'https://files.report.su/imagefolder/1958d5b4-05f9-4273-96ad-3e133c7d2cfa.jpg'
+                        deliveryTime: 40-50 мин
+                        workTime: '10:00—23:00'
+                        costliness: 1
+                        isAvailable: true
+                        notAvailableDescription: Ресторан не работает до завтра
+                      - id: '7'
+                        name: Перчини
+                        description: Перчини на огне
+                        additionText: доставим бесплатно от 900 рублей
+                        imageBanner: 'https://files.report.su/imagefolder/1958d5b4-05f9-4273-96ad-3e133c7d2cfa.jpg'
+                        deliveryTime: 40-50 мин
+                        workTime: '10:00—23:00'
+                        costliness: 1
+                        isAvailable: true
+                        notAvailableDescription: Ресторан не работает до завтра
+                    restaurants:
+                      - id: '1'
+                        name: Перчини
+                        description: Перчини на огне
+                        additionText: доставим бесплатно от 900 рублей
+                        imageBanner: 'https://files.report.su/imagefolder/1958d5b4-05f9-4273-96ad-3e133c7d2cfa.jpg'
+                        deliveryTime: 40-50 мин
+                        workTime: '10:00—23:00'
+                        costliness: 1
+                        isAvailable: true
+                        notAvailableDescription: Ресторан не работает до завтра
+                      - id: '2'
+                        name: Перчини
+                        description: Перчини на огне
+                        additionText: доставим бесплатно от 900 рублей
+                        imageBanner: 'https://files.report.su/imagefolder/863b3cd1-ad78-4587-b311-2905685a238c.jpg'
+                        deliveryTime: 40-50 мин
+                        workTime: '10:00—23:00'
+                        costliness: 2
+                        isAvailable: false
+                        notAvailableDescription: Ресторан не работает до завтра
+                      - id: '3'
+                        name: Перчини
+                        description: Перчини на огне
+                        additionText: доставим бесплатно от 900 рублей
+                        imageBanner: 'https://files.report.su/imagefolder/04189eb3-c1ed-4bad-a547-f0180da3db5a.jpg'
+                        deliveryTime: 40-50 мин
+                        workTime: '10:00—23:00'
+                        costliness: 3
+                        isAvailable: true
+                        notAvailableDescription: Ресторан не работает до завтра
+                      - id: '4'
+                        name: Перчини
+                        description: Перчини на огне
+                        additionText: доставим бесплатно от 900 рублей
+                        imageBanner: 'https://files.report.su/imagefolder/bd25c3e3-87a7-4f91-93d4-d97108c24dc2.jpg'
+                        deliveryTime: 40-50 мин
+                        workTime: '10:00—23:00'
+                        costliness: 1
+                        isAvailable: true
+                        notAvailableDescription: Ресторан не работает до завтра
+                      - id: '5'
+                        name: Перчини
+                        description: Перчини на огне
+                        additionText: доставим бесплатно от 900 рублей
+                        imageBanner: 'https://files.report.su/imagefolder/1958d5b4-05f9-4273-96ad-3e133c7d2cfa.jpg'
+                        deliveryTime: 40-50 мин
+                        workTime: '10:00—23:00'
+                        costliness: 1
+                        isAvailable: true
+                        notAvailableDescription: Ресторан не работает до завтра
+                      - id: '6'
+                        name: Перчини
+                        description: Перчини на огне
+                        additionText: доставим бесплатно от 900 рублей
+                        imageBanner: 'https://files.report.su/imagefolder/1958d5b4-05f9-4273-96ad-3e133c7d2cfa.jpg'
+                        deliveryTime: 40-50 мин
+                        workTime: '10:00—23:00'
+                        costliness: 1
+                        isAvailable: true
+                        notAvailableDescription: Ресторан не работает до завтра
+                      - id: '7'
+                        name: Перчини
+                        description: Перчини на огне
+                        additionText: доставим бесплатно от 900 рублей
+                        imageBanner: 'https://files.report.su/imagefolder/1958d5b4-05f9-4273-96ad-3e133c7d2cfa.jpg'
+                        deliveryTime: 40-50 мин
+                        workTime: '10:00—23:00'
+                        costliness: 1
+                        isAvailable: true
+                        notAvailableDescription: Ресторан не работает до завтра
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Address'
+        description: ''
+      tags:
+        - conception
+      description: Получить все концепции
+    parameters: []
+  /conception/choose:
+    post:
+      summary: Get conception
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: '1'
+                  name:
+                    type: string
+                    example: Чучвара
+                  tags:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: '1'
+                        name:
+                          type: string
+                          example: Для всей семьи
+                        img:
+                          type: string
+                          example: 'https://files.report.su/imagefolder/a4a97e56-28ed-480c-80f9-15441844e6cf.svg'
+                      required:
+                        - id
+                        - name
+                        - img
+                  categories:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                          example: Пиццы
+                        id:
+                          type: string
+                          example: у23п34-12а234-2134
+                        products:
+                          type: array
+                          items:
+                            $ref: '#/components/schemas/ProductDetail'
+                      required:
+                        - title
+                        - id
+                        - products
+                  openTime:
+                    type: string
+                    format: time
+                    example: '10:00'
+                  closeTime:
+                    type: string
+                    format: time
+                    example: '23:00'
+                  description:
+                    type: string
+                    example: О концепции Перчини
+                  entitiyLink:
+                    type: string
+                    format: uri
+                  vkLink:
+                    type: string
+                    format: uri
+                  telegramLink:
+                    type: string
+                    format: uri
+                  headerLogoImg:
+                    type: string
+                    format: uri
+                    example: 'https://files.report.su/imagefolder/71bd35e0-ff80-4be0-b425-1391513c88bc.jpg'
+                  headerColor:
+                    type: string
+                    example: 'rgb(230, 51, 42)'
+                  paymentMethods:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PaymentMethod'
+                  pickupPoints:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PickupPoint'
+                  promotions:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Promotion'
+                required:
+                  - id
+                  - name
+                  - tags
+                  - categories
+                  - openTime
+                  - closeTime
+                  - description
+                  - entitiyLink
+                  - vkLink
+                  - telegramLink
+                  - headerLogoImg
+                  - headerColor
+                  - paymentMethods
+                  - pickupPoints
+                  - promotions
+              examples:
+                example-1:
+                  value:
+                    id: '1'
+                    name: Чучвара
+                    tags:
+                      - id: '1'
+                        name: Для всей семьи
+                        img: 'https://files.report.su/imagefolder/a4a97e56-28ed-480c-80f9-15441844e6cf.svg'
+                      - id: '2'
+                        name: Быстро
+                        img: 'https://files.report.su/imagefolder/a4a97e56-28ed-480c-80f9-15441844e6cf.svg'
+                    openTime: '10:00'
+                    closeTime: '23:00'
+                    description: О концепции Перчини
+                    entitiyLink: 'http://example.com'
+                    vkLink: 'http://example.com'
+                    telegramLink: 'http://example.com'
+                    headerLogoImg: 'https://files.report.su/imagefolder/71bd35e0-ff80-4be0-b425-1391513c88bc.jpg'
+                    categories:
+                      title: Пиццы
+                      id: у23п34-12а234-2134
+                      products:
+                        - id: 1233fd-f23fwe12-d23e1f12r12f
+                          conceptionId: '1'
+                          tags:
+                            - '1'
+                          name: Перчини
+                          price: 1200
+                          image: 'https://files.report.su/imagefolder/5e6e73a5-1afe-4130-85d3-f528335d9730.jpg'
+                          description: 'Пицца приготовленная с душой '
+                          isAvailable: true
+                          weight: 100 г
+                          nutritionFact:
+                            energyValue: 500 ккал
+                            protein: 10 г
+                            fat: 50 г
+                            carbohydrate: 20 г
+                          modifiers:
+                            - id: '1'
+                              name: Соус
+                              required: true
+                              minAmount: 1
+                              maxAmount: 2
+                              childModifiers:
+                                - id: '2'
+                                  name: Острый
+                                  required: true
+                                  minAmount: 1
+                                  maxAmount: 1
+                                  price: 100
+                    headerColor: 'rgb(230, 51, 42)'
+                    paymentMethods:
+                      - id: 31к2-к32па34-123123
+                        name: Онлайн
+                        online: true
+                    pickupPoints:
+                      - id: 421а34-1231а2134-в3421
+                        name: Московское шоссе 22
+                        address: Московское шоссе дом 22
+                    promotions:
+                      - id: '1'
+                        name: Новая акция
+                        description: Дарим подарки на этой недели !
+                        image: 'https://files.report.su/imagefolder/1958d5b4-05f9-4273-96ad-3e133c7d2cfa.jpg'
+                        link: string
+        '204':
+          description: No Content
+      operationId: conception-choose
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                conceptionId:
+                  type: string
+                  example: 99ec0d5e-a0ac-11ea-a245-704d7b711d82
+                address:
+                  $ref: '#/components/schemas/Address'
+              required:
+                - conceptionId
+                - address
+            examples: {}
+          application/xml:
+            schema:
+              type: object
+              properties:
+                restaurantId:
+                  type: string
+        description: ''
+      description: Главная информация концепции
+      tags:
+        - conception
+    parameters: []
+  /conception/call-back:
+    post:
+      summary: Call back
+      operationId: conception-callback
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                conceptionId:
+                  type: string
+                  example: '1'
+                phoneNumber:
+                  type: string
+                  example: '+79212314567'
+              required:
+                - conceptionId
+                - phoneNumber
+        description: ''
+      tags:
+        - conception
+      description: Перезвонить
+    parameters: []
+  /order/active-status:
+    post:
+      summary: Get order status
+      operationId: post-order-active-status
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: по3ш49-123а123-а123123
+                  name:
+                    type: string
+                    example: Заказ №25 / Хокку
+                  status:
+                    type: string
+                    example: В пути
+                required:
+                  - id
+                  - name
+                  - status
+        '204':
+          description: No Content
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                orderId:
+                  type: string
+                  example: 8483f948-f326-11ec-a281-704d7b711d82
+              required:
+                - orderId
+      tags:
+        - order
+      description: Узнать статус заказа
+      parameters: []
+    parameters: []
+  /order/recommendation:
+    post:
+      summary: Get recommendations
+      operationId: post-order-recommendation
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductDetail'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                conceptionId:
+                  type: string
+                  example: 99ec0d5e-a0ac-11ea-a245-704d7b711d82
+                products:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ProductForServer'
+      tags:
+        - order
+      description: Получить рекомендации
+  /order/available-bonus:
+    post:
+      summary: Get available bonuses
+      operationId: post-order-available-bonus
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  bonus:
+                    type: number
+                    example: 500
+                required:
+                  - bonus
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                conceptionId:
+                  type: string
+                  example: 229e282f-9a71-11ea-a245-704d7b711d82
+                products:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ProductForServer'
+                promoCode:
+                  type: string
+                deliveryType:
+                  type: string
+                  enum:
+                    - delivery
+                    - selfDelivery
+              required:
+                - conceptionId
+                - products
+                - promoCode
+                - deliveryType
+            examples:
+              example-1:
+                value:
+                  conceptionId: 229e282f-9a71-11ea-a245-704d7b711d82
+                  products:
+                    - id: 725a7be6-e7fd-4186-909f-f844ebe909f0
+                      amount: 2
+                      modifiers:
+                        - id: 83eaa58b-c5f3-4aca-bf6b-5123f86e00ba
+                          amount: 1
+                          childModifiers:
+                            - id: bb5b3b43-b794-44aa-9d3f-7c4ddba90b5d
+                              amount: 2
+                  promoCode: string
+                  deliveryType: delivery
+      tags:
+        - order
+      description: Получить доступные бонусы
+      parameters: []
+  /order/check:
+    post:
+      summary: Check order
+      operationId: post-order-check
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  appliedPromotions:
+                    type: array
+                    items:
+                      type: string
+                      example: Скидка 10%
+                  orderSum:
+                    type: number
+                    example: 5000
+                  deliveryTime:
+                    type: string
+                    example: 40 минут
+                required:
+                  - orderSum
+                  - deliveryTime
+        '205':
+          description: Reset Content
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Ошибка в заполнении данных
+                required:
+                  - error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                conceptionId:
+                  type: string
+                  example: 229e282f-9a71-11ea-a245-704d7b711d82
+                products:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ProductForServer'
+                phone:
+                  type: string
+                  example: '89277665544'
+                bonus:
+                  type: number
+                  example: 100
+                pickupPoint:
+                  $ref: '#/components/schemas/PickupPoint'
+                address:
+                  $ref: '#/components/schemas/Address'
+                promoCode:
+                  type: string
+              required:
+                - conceptionId
+                - products
+                - phone
+      tags:
+        - order
+      description: Проверка заказа
+      parameters: []
+  /order/make-order:
+    post:
+      summary: Make order
+      operationId: post-order-make-order
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Ошибка при создании заказа
+                required:
+                  - error
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  payUrl:
+                    type: string
+                    format: uri
+                  orderId:
+                    type: string
+                    example: 1231243-12312412-12312412
+                required:
+                  - orderId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                conceptionId:
+                  type: string
+                  example: '1'
+                products:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ProductForServer'
+                people:
+                  type: number
+                  example: 5
+                promoCode:
+                  type: string
+                  example: ПИЦЦА
+                phone:
+                  type: string
+                  example: '+79212311234'
+                address:
+                  $ref: '#/components/schemas/Address'
+                entrance:
+                  type: string
+                  example: 10
+                flat:
+                  type: string
+                  example: 211А
+                floor:
+                  type: string
+                  example: '5'
+                pickupPoint:
+                  $ref: '#/components/schemas/PickupPoint'
+                comment:
+                  type: string
+                  example: 'Побыстрее, пожалуйста'
+                callBack:
+                  type: boolean
+                  default: false
+                paymentMethod:
+                  $ref: '#/components/schemas/PaymentMethod'
+                bonus:
+                  type: number
+                  example: 100
+              required:
+                - conceptionId
+                - products
+                - people
+                - phone
+                - callBack
+                - paymentMethod
+      tags:
+        - order
+      description: Сделать заказ
+  /side-panel:
+    get:
+      summary: Get side panel
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  image:
+                    type: string
+                    format: uri
+                  title:
+                    type: string
+                  description:
+                    type: string
+                  url:
+                    type: string
+                    format: uri
+                required:
+                  - image
+                  - title
+                  - description
+                  - url
+      operationId: get-side-panel
+components:
+  schemas:
+    AuthToken:
+      title: ''
+      type: object
+      properties:
+        access:
+          type: string
+          example: jfie4hN112h3BHBK213hb123
+        refresh:
+          type: string
+          example: 2H2g17Gy81JH1hb23
+      required:
+        - access
+        - refresh
+    ProductDetail:
+      title: ''
+      type: object
+      description: ''
+      properties:
+        id:
+          type: string
+          example: 1233fd-f23fwe12-d23e1f12r12f
+        conceptionId:
+          type: string
+          example: '1'
+        tags:
+          type: array
+          description: Массив id тэгов
+          items:
+            type: string
+            example: '1'
+        name:
+          type: string
+          example: Перчини
+        price:
+          type: number
+          example: 1200
+        image:
+          type: string
+          format: uri
+          example: 'https://files.report.su/imagefolder/5e6e73a5-1afe-4130-85d3-f528335d9730.jpg'
+        description:
+          type: string
+          example: 'Пицца приготовленная с душой '
+        isAvailable:
+          type: boolean
+          default: true
+        weight:
+          type: string
+          example: 100 г
+        nutritionFact:
+          type: object
+          required:
+            - energyValue
+            - protein
+            - fat
+            - carbohydrate
+          properties:
+            energyValue:
+              type: string
+              example: 500 ккал
+            protein:
+              type: string
+              example: 10 г
+            fat:
+              type: string
+              example: 50 г
+            carbohydrate:
+              type: string
+              example: 20 г
+        modifiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Modifier'
+      required:
+        - id
+        - conceptionId
+        - tags
+        - name
+        - price
+        - image
+        - description
+        - isAvailable
+        - weight
+        - nutritionFact
+    User:
+      title: ''
+      type: object
+      x-examples:
+        example-1:
+          firstName: Иван
+          secondName: Иванов
+          birthday: '2022-07-31'
+          email: user@example.com
+          phoneNumber: '+79298714321'
+          bonus: 200
+      properties:
+        firstName:
+          type: string
+          example: Иван
+        secondName:
+          type: string
+          example: Иванов
+        birthday:
+          type: string
+          format: date
+          example: '2022-07-31'
+        email:
+          type: string
+          format: email
+        phoneNumber:
+          type: string
+          example: '+79298714321'
+        bonus:
+          type: number
+          example: 200
+      required:
+        - phoneNumber
+        - bonus
+    PhoneNumber:
+      title: PhoneNumber
+      x-stoplight:
+        id: fnbdvjkpbgs4b
+      type: object
+      properties:
+        phoneNumber:
+          type: string
+          example: '+79255713643'
+      required:
+        - phoneNumber
+    Conception:
+      title: Conception
+      x-stoplight:
+        id: cf5n6vu37tg4k
+      type: object
+      properties:
+        id:
+          type: string
+          example: '1'
+        name:
+          type: string
+          example: Перчини
+        description:
+          type: string
+          example: Перчини на огне
+        additionText:
+          type: string
+          example: доставим бесплатно от 900 рублей
+        imageBanner:
+          type: string
+          format: uri
+          example: 'https://files.report.su/imagefolder/1958d5b4-05f9-4273-96ad-3e133c7d2cfa.jpg'
+        deliveryTime:
+          type: string
+          example: 40-50 мин
+        workTime:
+          type: string
+          example: '10:00—23:00'
+        costliness:
+          type: number
+          enum:
+            - 1
+            - 2
+            - 3
+        isAvailable:
+          type: boolean
+          default: true
+        notAvailableDescription:
+          type: string
+          example: Ресторан не работает до завтра
+      required:
+        - id
+        - name
+        - description
+        - additionText
+        - imageBanner
+        - deliveryTime
+        - workTime
+        - costliness
+        - isAvailable
+        - notAvailableDescription
+    PaymentMethod:
+      title: PaymentMethod
+      x-stoplight:
+        id: hfi4fq739rqrz
+      type: object
+      properties:
+        id:
+          type: string
+          example: 31к2-к32па34-123123
+        name:
+          type: string
+          example: Онлайн
+        online:
+          type: boolean
+          default: true
+      required:
+        - id
+        - name
+        - online
+    PickupPoint:
+      title: PickupPoint
+      x-stoplight:
+        id: 6wkv1o522dy3w
+      type: object
+      properties:
+        id:
+          type: string
+          example: 421а34-1231а2134-в3421
+        name:
+          type: string
+          example: Московское шоссе 22
+        address:
+          type: string
+          example: Московское шоссе дом 22
+      required:
+        - id
+        - name
+        - address
+    Modifier:
+      title: Modifier
+      x-stoplight:
+        id: lzue7caigimb7
+      type: object
+      properties:
+        id:
+          type: string
+          example: '1'
+        name:
+          type: string
+          example: Соус
+        required:
+          type: boolean
+          default: true
+        minAmount:
+          type: number
+          example: 1
+        maxAmount:
+          type: number
+          example: 2
+        childModifiers:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                example: '2'
+              name:
+                type: string
+                example: Острый
+              required:
+                type: boolean
+                default: true
+              minAmount:
+                type: number
+                example: 1
+              maxAmount:
+                type: number
+                example: 1
+              price:
+                type: number
+                example: 100
+            required:
+              - id
+              - name
+              - required
+              - minAmount
+              - maxAmount
+              - price
+      required:
+        - id
+        - name
+        - required
+        - minAmount
+        - maxAmount
+        - childModifiers
+    ProductForServer:
+      title: ProductForServer
+      x-stoplight:
+        id: 0gevy1phssh6x
+      type: object
+      description: ''
+      x-examples:
+        example-1:
+          id: 725a7be6-e7fd-4186-909f-f844ebe909f0
+          conceptionId: string
+          name: string
+          amount: 2
+          price: 0
+          image: 'http://example.com'
+          modifiers:
+            - id: 83eaa58b-c5f3-4aca-bf6b-5123f86e00ba
+              name: string
+              minAmount: 0
+              maxAmount: 0
+              childModifiers:
+                - id: bb5b3b43-b794-44aa-9d3f-7c4ddba90b5d
+                  name: string
+                  price: 0
+      properties:
+        id:
+          type: string
+          example: 725a7be6-e7fd-4186-909f-f844ebe909f0
+        conceptionId:
+          type: string
+        name:
+          type: string
+        amount:
+          type: number
+          example: 2
+        price:
+          type: number
+        image:
+          type: string
+          format: uri
+        modifiers:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                example: 83eaa58b-c5f3-4aca-bf6b-5123f86e00ba
+              name:
+                type: string
+              minAmount:
+                type: number
+              maxAmount:
+                type: number
+              childModifiers:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      example: bb5b3b43-b794-44aa-9d3f-7c4ddba90b5d
+                    name:
+                      type: string
+                    price:
+                      type: number
+                  required:
+                    - id
+                    - name
+                    - price
+            required:
+              - id
+              - name
+              - minAmount
+              - maxAmount
+              - childModifiers
+      required:
+        - id
+        - conceptionId
+        - name
+        - amount
+        - price
+        - image
+    Address:
+      title: Address
+      x-stoplight:
+        id: vjzee1gtome8q
+      type: object
+      properties:
+        name:
+          type: string
+          example: Ерошевского д. 20
+        lat:
+          type: number
+          example: 53.11
+        lon:
+          type: number
+          example: 50.1
+        cityFiasId:
+          type: string
+          example: bb035cc3-1dc2-4627-9d25-a1bf2d4b936b
+      required:
+        - name
+        - lat
+        - lon
+        - cityFiasId
+    Promotion:
+      title: Promotion
+      x-stoplight:
+        id: mpi2lp7mxv1g6
+      type: object
+      properties:
+        id:
+          type: string
+          example: '1'
+        name:
+          type: string
+          example: Новая акция
+        description:
+          type: string
+          example: Дарим подарки на этой недели !
+        image:
+          type: string
+          format: uri
+          example: 'https://files.report.su/imagefolder/1958d5b4-05f9-4273-96ad-3e133c7d2cfa.jpg'
+        link:
+          type: string
+      required:
+        - id
+        - name
+        - description
+        - image
+        - link
+  responses: {}
+  securitySchemes: {}
+  requestBodies: {}
+  examples: {}
+  parameters:
+    token:
+      name: Authorization
+      in: header
+      schema:
+        enum:
+          - eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiY2RkODk1OWQtYTY4Yi0xMWViLWEyNWEtNzA0ZDdiNzExZDgyIiwic2Vzc2lvbl9pZCI6IjUxMzM0MGVmLWFjZDMtNDhmZC1hNzVkLTJhMDNiNjkyMmI3OCIsImV4cCI6IjIwMjMtMDEtMTZUMTk6MDg6MjhaIn0=.MNDAqulieRww4TasAY96OqGGrvE79fyX/Mcii2Yu1dg=

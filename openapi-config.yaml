@@ -1,0 +1,3 @@
+additionalProperties:
+  useSingleRequestParameter: false
+  enumPropertyNaming: UPPERCASE

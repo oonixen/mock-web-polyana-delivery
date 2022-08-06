@@ -1,0 +1,2 @@
+export const headerCategoryNavigation__header_heightSm = 35
+export const headerCategoryNavigation__header_height = 60

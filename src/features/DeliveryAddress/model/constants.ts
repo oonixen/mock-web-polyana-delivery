@@ -1,0 +1,1 @@
+export const LOCALSTORAGE_PARAM_NAME_USER_ADDRESS = "PD:User:DeliveryAddressModalWindow"

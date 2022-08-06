@@ -1,0 +1,3 @@
+export const base64 = {
+    pngImageGreyColor: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mO8mQsAAiUBSGFIm7IAAAAASUVORK5CYII="
+}
